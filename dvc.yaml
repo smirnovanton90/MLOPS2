@@ -20,3 +20,10 @@ stages:
     - scripts/data_processing/rating_MPAA_OHE.py
     outs:
     - datasets/stage3
+  drop-na:
+    cmd: python3 scripts/data_processing/drop_na.py datasets/stage3/train.csv
+    deps:
+    - datasets/stage3/train.csv
+    - scripts/data_processing/drop_na.py
+    outs:
+    - datasets/stage4

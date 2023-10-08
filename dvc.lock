@@ -9,21 +9,21 @@ stages:
       size: 35143122
     - path: scripts/data_processing/get_features.py
       hash: md5
-      md5: 8928be4ffcce649da70a4b6b869f67fc
-      size: 696
+      md5: dafe42aa4c8257a13aac1360e188d0f7
+      size: 682
     outs:
     - path: datasets/stage1
       hash: md5
-      md5: 76df75fcc66c15a7671204c32be623b7.dir
-      size: 1227058
+      md5: 4e5ccad3b15bb6917f616f4798c94e68.dir
+      size: 994156
       nfiles: 1
   split-director:
     cmd: python3 scripts/data_processing/split_director.py datasets/stage1/train.csv
     deps:
     - path: datasets/stage1/train.csv
       hash: md5
-      md5: 2eecbde76b6352bc42087ed018c42540
-      size: 1227058
+      md5: 0c293027056ff56bd5133b6800ecf92d
+      size: 994156
     - path: scripts/data_processing/split_director.py
       hash: md5
       md5: 4e64f8e4ed372002bf92461f1077ed88
@@ -31,6 +31,40 @@ stages:
     outs:
     - path: datasets/stage2
       hash: md5
-      md5: 2137f89a5224621a10f3970818fb5254.dir
-      size: 1380497
+      md5: 2c73d77f4fee24f9831c26ba4dbb290c.dir
+      size: 1147595
+      nfiles: 1
+  rating_MPAA-OHE:
+    cmd: python3 scripts/data_processing/rating_MPAA_OHE.py datasets/stage2/train.csv
+    deps:
+    - path: datasets/stage2/train.csv
+      hash: md5
+      md5: 71d00c9114364f432af317f1c700344e
+      size: 1147595
+    - path: scripts/data_processing/rating_MPAA_OHE.py
+      hash: md5
+      md5: 9f9e16cc4eba1735c999200f2a3a8182
+      size: 774
+    outs:
+    - path: datasets/stage3
+      hash: md5
+      md5: bd07d98547c7ab58e1e12449c7c74ec0.dir
+      size: 1980833
+      nfiles: 1
+  drop-na:
+    cmd: python3 scripts/data_processing/drop_na.py datasets/stage3/train.csv
+    deps:
+    - path: datasets/stage3/train.csv
+      hash: md5
+      md5: 71f01266ff506ba1f0a3470297aece35
+      size: 1980833
+    - path: scripts/data_processing/drop_na.py
+      hash: md5
+      md5: c33e147378cbc4e0c96f1be799657723
+      size: 646
+    outs:
+    - path: datasets/stage4
+      hash: md5
+      md5: 475c263d4c5a2cca2ce46988fa3791bd.dir
+      size: 1814843
       nfiles: 1
