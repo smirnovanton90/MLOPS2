@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  get-features:
+    cmd: python3 scripts/data_processing/get_features.py data/raw/train.csv
+    deps:
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 7828be7ebc0d0d2350e2b1bd39163464
+      size: 35143122
+    - path: scripts/data_processing/get_features.py
+      hash: md5
+      md5: 062359b07652d5b20b8664547d665d5a
+      size: 683
+    outs:
+    - path: datasets/stage1
+      hash: md5
+      md5: 254f534d54d1a96c0237b0e4a83cc844.dir
+      size: 1412221
+      nfiles: 1
