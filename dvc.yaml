@@ -13,3 +13,10 @@ stages:
     - scripts/data_processing/split_director.py
     outs:
     - datasets/stage2
+  rating_MPAA-OHE:
+    cmd: python3 scripts/data_processing/rating_MPAA_OHE.py datasets/stage2/train.csv
+    deps:
+    - datasets/stage2/train.csv
+    - scripts/data_processing/rating_MPAA_OHE.py
+    outs:
+    - datasets/stage3
