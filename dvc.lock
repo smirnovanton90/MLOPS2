@@ -9,11 +9,28 @@ stages:
       size: 35143122
     - path: scripts/data_processing/get_features.py
       hash: md5
-      md5: 062359b07652d5b20b8664547d665d5a
-      size: 683
+      md5: 8928be4ffcce649da70a4b6b869f67fc
+      size: 696
     outs:
     - path: datasets/stage1
       hash: md5
-      md5: 254f534d54d1a96c0237b0e4a83cc844.dir
-      size: 1412221
+      md5: 76df75fcc66c15a7671204c32be623b7.dir
+      size: 1227058
+      nfiles: 1
+  split-director:
+    cmd: python3 scripts/data_processing/split_director.py datasets/stage1/train.csv
+    deps:
+    - path: datasets/stage1/train.csv
+      hash: md5
+      md5: 2eecbde76b6352bc42087ed018c42540
+      size: 1227058
+    - path: scripts/data_processing/split_director.py
+      hash: md5
+      md5: 4e64f8e4ed372002bf92461f1077ed88
+      size: 724
+    outs:
+    - path: datasets/stage2
+      hash: md5
+      md5: 2137f89a5224621a10f3970818fb5254.dir
+      size: 1380497
       nfiles: 1
