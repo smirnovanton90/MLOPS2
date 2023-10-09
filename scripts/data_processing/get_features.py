@@ -15,7 +15,7 @@ os.makedirs(os.path.join("datasets", "stage1"), exist_ok=True)
 
 def process_data(fd_in, fd_out):
     data = pd.read_csv(fd_in)
-    data_prepared = data[['id', 'rating_MPAA', 'director', 'rating']]
+    data_prepared = data[['rating_MPAA', 'rating']]
     fd_out.write(data_prepared.to_csv(index = False))
 
 with io.open(f_input, encoding="utf8") as fd_in:

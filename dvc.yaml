@@ -6,33 +6,36 @@ stages:
     - scripts/data_processing/get_features.py
     outs:
     - datasets/stage1
-  split-director:
-    cmd: python3 scripts/data_processing/split_director.py datasets/stage1/train.csv
+  rating_MPAA-OHE:
+    cmd: python3 scripts/data_processing/rating_MPAA_OHE.py datasets/stage1/train.csv
     deps:
     - datasets/stage1/train.csv
-    - scripts/data_processing/split_director.py
-    outs:
-    - datasets/stage2
-  rating_MPAA-OHE:
-    cmd: python3 scripts/data_processing/rating_MPAA_OHE.py datasets/stage2/train.csv
-    deps:
-    - datasets/stage2/train.csv
     - scripts/data_processing/rating_MPAA_OHE.py
     outs:
-    - datasets/stage3
+    - datasets/stage2
   drop-na:
-    cmd: python3 scripts/data_processing/drop_na.py datasets/stage3/train.csv
+    cmd: python3 scripts/data_processing/drop_na.py datasets/stage2/train.csv
     deps:
-    - datasets/stage3/train.csv
+    - datasets/stage2/train.csv
     - scripts/data_processing/drop_na.py
     outs:
-    - datasets/stage4
+    - datasets/stage3
   split:
-    cmd: python3 scripts/data_processing/train_test_split.py datasets/stage4/train.csv
+    cmd: python3 scripts/data_processing/train_test_split.py datasets/stage3/train.csv
     deps:
-    - datasets/stage4/train.csv
+    - datasets/stage3/train.csv
     - scripts/data_processing/train_test_split.py
     params:
     - split.split_ratio
     outs:
-    - datasets/stage5
+    - datasets/stage4
+  train:
+    cmd: python3 scripts/model_learning/dt.py datasets/stage4/train.csv model.pkl
+    deps:
+    - datasets/stage4/train.csv
+    - scripts/model_learning/dt.py
+    params:
+    - train.max_depth
+    - train.seed
+    outs:
+    - models/model.pkl
