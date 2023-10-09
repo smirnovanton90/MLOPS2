@@ -27,3 +27,12 @@ stages:
     - scripts/data_processing/drop_na.py
     outs:
     - datasets/stage4
+  split:
+    cmd: python3 scripts/data_processing/train_test_split.py datasets/stage4/train.csv
+    deps:
+    - datasets/stage4/train.csv
+    - scripts/data_processing/train_test_split.py
+    params:
+    - split.split_ratio
+    outs:
+    - datasets/stage5
