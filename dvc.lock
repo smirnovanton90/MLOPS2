@@ -108,3 +108,23 @@ stages:
       hash: md5
       md5: af33a49e42e785b1881e0de16939fdeb
       size: 1935
+  evaluate:
+    cmd: python3 scripts/model_learning/evaluate.py datasets/stage4/test.csv models/model.pkl
+    deps:
+    - path: datasets/stage4/train.csv
+      hash: md5
+      md5: 3e69530db02b4d889436768e3b1655ec
+      size: 818440
+    - path: models/model.pkl
+      hash: md5
+      md5: af33a49e42e785b1881e0de16939fdeb
+      size: 1935
+    - path: scripts/model_learning/evaluate.py
+      hash: md5
+      md5: 2d4904b23b9cc2a751c0d6c0c09cab29
+      size: 567
+    outs:
+    - path: evaluate/score.json
+      hash: md5
+      md5: 241b1d0efb212897a4a5699b1929282f
+      size: 30
